@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv').config()
 const app = express()
 const port = 8000
 
@@ -12,7 +13,7 @@ app.use((req,res)=>{res.status(404).json({message :"Route not found"})})
 
 try {
     const start =async ()=>{
-        const conn =await mongoose.connect('mongodb+srv://eugeneokogun:kLYA2dtfoK2QXW0c@cluster1.uhlzu.mongodb.net/formTest?retryWrites=true&w=majority&appName=Cluster1')
+        const conn =await mongoose.connect(process.env.MONGO_URI)
         console.log('DB Connected');        
         app.listen(port,()=>{
         console.log(`Server is listening on port: ${port}`);
